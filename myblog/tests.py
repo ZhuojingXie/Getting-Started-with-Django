@@ -18,3 +18,15 @@ class PostTestCase(TestCase):
         p1 = Post(title=expected)
         actual = str(p1)
         self.assertEqual(expected, actual)
+
+# another import
+from myblog.models import Category
+
+# and the test case and test
+class CategoryTestCase(TestCase):
+
+    def test_string_representation(self):
+        expected = "A Category"
+        c1 = Category(name=expected)
+        actual = str(c1)
+        self.assertEqual(expected, actual)
