@@ -1,12 +1,18 @@
 from django.contrib import admin
-
-
 from myblog.models import Post
-
-admin.site.register(Post)
-
-# a new import
 from myblog.models import Category
 
-# and a new admin registration
+class CategoryInline(admin.TabularInline):
+        model = Post.categories.through
+
+class PostAdmin(admin.ModelAdmin):
+    empty_value_display = '-empty-'
+    inlines = [
+        CategoryInline,
+        ]
+admin.site.register(Post,PostAdmin)
+
+class CategoryAdmin(admin.ModelAdmin):
+    empty_value_display = '-empty-'
+    exclude = ('posts',)
 admin.site.register(Category)
