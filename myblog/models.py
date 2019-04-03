@@ -13,12 +13,15 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return '/posts/{}'.format(self.id)
+
 class Category(models.Model):
     name = models.CharField(max_length=128)
     description = models.TextField(blank=True)
     posts = models.ManyToManyField(Post, blank=True, related_name='categories')
     class Meta:
-        verbose_name_plural = 'Categories' 
+        verbose_name_plural = 'Categories'
 
 
     def __str__(self):
